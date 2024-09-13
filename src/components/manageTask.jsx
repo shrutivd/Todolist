@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function ManageTask() {
   const [title, setTitle] = useState("");
@@ -7,17 +8,16 @@ function ManageTask() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true when the request starts
+    setLoading(true); 
     try {
-      let result = await fetch("http://localhost:5000/register", {
-        method: "POST",
-        body: JSON.stringify({ title, description }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await axios.post("http://localhost:5000/register", {
+        title,
+        description
       });
-      result = await result.json();
+      
+      const result = response.data;
       console.warn(result);
+
       if (result) {
         alert("Data saved successfully");
         setTitle("");
@@ -27,7 +27,7 @@ function ManageTask() {
       console.error("Error saving data:", error);
       alert("Failed to save data. Please try again.");
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false); 
     }
   };
 
