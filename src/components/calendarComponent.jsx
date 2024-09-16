@@ -6,9 +6,15 @@ import 'react-calendar/dist/Calendar.css';
 
 function CalendarComponent() {
   const [dateValue, setDateValue] = useState(new Date())
+  const [manageTask, showManageTask] = useState(false)
 
   const handleUserInput = (userSelectedDate) =>{
-    setDateValue(userSelectedDate)
+    if(userSelectedDate < new Date){
+      alert("Please select today or future date");
+      return
+    }
+   setDateValue(userSelectedDate)
+    showManageTask(true)
   }
 
  return (
@@ -17,9 +23,7 @@ function CalendarComponent() {
     value={dateValue}
     onChange={handleUserInput}
     />
-    <div>
-      <ManageTask/>
-    </div>
+    {manageTask && <ManageTask data={dateValue.toDateString()} />}  
     </>
   );
 }
