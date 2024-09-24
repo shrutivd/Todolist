@@ -20,7 +20,7 @@ app.use(express.json());
 let db;
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((client) => {
-    console.log("Connected to MongoDB");
+    console.info("Connected to MongoDB");
     db = client.db("Todolist"); 
   })
   .catch((err) => console.error("Failed to connect to MongoDB", err));
@@ -49,5 +49,5 @@ app.post("/register", async (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.info(`Server running on http://localhost:${port}`);
 });

@@ -12,7 +12,7 @@ function App() {
       <div>     
         <h1 className="pt-8">Todo list</h1>
       </div>
-      <div className="box-content pt-32s">
+      <div className="content-center">
       <CalendarComponent />
       </div>
       </div>
